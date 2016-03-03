@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"net/url"
 	"os"
@@ -74,6 +75,10 @@ type Members struct {
 	} `json:"items"`
 }
 
+type page struct {
+	Prefix string
+}
+
 var urlClan = "https://api.clashofclans.com/v1/clans/%s"
 var urlMembers = "https://api.clashofclans.com/v1/clans/%s/members"
 var myKey, myClanTag string
@@ -84,7 +89,7 @@ func init() {
 }
 
 func main() {
-	clan, err := getClanInfo(myClanTag)
+	/*clan, err := getClanInfo(myClanTag)
 	if err != nil {
 		panic(err)
 	}
@@ -93,7 +98,15 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(members.Items[0])
+	fmt.Println(members.Items[0])*/
+
+	//http.Handle("bower_components", http.FileServer(http.Dir("/tmp")))
+	//http.HandleFunc("/", handleIndexPage)
+	//log.Fatal(http.ListenAndServe(":8080", nil))
+
+	router := NewRouter()
+	log.Fatal(http.ListenAndServe(":8080", router))
+
 }
 
 func getMemberInfo(clanTag string) (members Members, err error) {
