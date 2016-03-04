@@ -109,6 +109,5 @@ func getUrl(url, key string) (b []byte, err error) {
 		b = []byte{}
 		err = errors.New("Error from server: " + strconv.Itoa(resp.StatusCode))
 	}
-	//fmt.Println(string(b), resp.StatusCode)
 	return
 }

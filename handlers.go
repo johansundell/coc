@@ -30,7 +30,7 @@ func handlePages(w http.ResponseWriter, req *http.Request) {
 		fmt.Println(err)
 		return
 	}
-	//fmt.Println(clan.MemberList)
+
 	b, err := json.Marshal(clan.MemberList)
 	if err != nil {
 		http.Error(w, http.StatusText(500), 500)
@@ -57,27 +57,14 @@ func handleIndexPage(w http.ResponseWriter, req *http.Request) {
 		fmt.Println(err)
 		return
 	}
-	/*clan, err := getClanInfo(myClanTag)
-	if err != nil {
-		panic(err)
-	}*/
+
 	p := page{}
 	p.Title = "COC Playground"
-	//p.Name = clan.Name
-	//p.Description = clan.Description
-	//b, err := json.Marshal(clan.MemberList)
-	//if err != nil {
-	//	fmt.Println(err)
-	//}
-	//p.MembersJson = string(b)
+
 	t.Delims("*{{", "}}*")
 	err = t.Execute(w, p)
 	if err != nil {
 		http.Error(w, http.StatusText(500), 500)
 		fmt.Println(err)
 	}
-}
-
-func test() string {
-	return "hello"
 }

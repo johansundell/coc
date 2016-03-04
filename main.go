@@ -17,22 +17,6 @@ func init() {
 }
 
 func main() {
-	/*clan, err := getClanInfo(myClanTag)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(clan.Name, clan.BadgeUrls.Large)*/
-	/*members, err := getMemberInfo(myClanTag)
-	if err != nil {
-		panic(err)
-	}*/
-	//fmt.Println(members.Items[0])
-
-	//http.Handle("bower_components", http.FileServer(http.Dir("/tmp")))
-	//http.HandleFunc("/", handleIndexPage)
-	//log.Fatal(http.ListenAndServe(":8080", nil))
-
 	router := NewRouter()
 	log.Fatal(http.ListenAndServe(":8080", router))
-
 }
