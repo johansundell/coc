@@ -21,7 +21,7 @@ var routes = Routes{
 	Route{
 		"clan-info",
 		"GET",
-		"/fixed/clan-info.html",
+		"/tmpl/clan-info.html",
 		handlePages,
 	},
 }
