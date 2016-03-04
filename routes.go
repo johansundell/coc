@@ -18,4 +18,10 @@ var routes = Routes{
 		"/",
 		handleIndexPage,
 	},
+	Route{
+		"clan-info",
+		"GET",
+		"/fixed/clan-info.html",
+		handlePages,
+	},
 }
