@@ -24,4 +24,16 @@ var routes = Routes{
 		"/tmpl/clan-info.html",
 		handlePages,
 	},
+	Route{
+		"Alerts",
+		"GET",
+		"/alert",
+		getAlerts,
+	},
+	Route{
+		"clan-errors",
+		"GET",
+		"/tmpl/clan-errors.html",
+		handleAlerts,
+	},
 }

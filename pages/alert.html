@@ -13,7 +13,7 @@
 		<link rel="import" href="./bower_components/iron-flex-layout/iron-flex-layout.html">
 		<link rel="import" href="./bower_components/iron-icons/iron-icons.html">
 		
-		<link rel="import" href="./tmpl/clan-info.html">
+		<link rel="import" href="./tmpl/clan-errors.html">
 		<style>
 			body {
 				font-family: Roboto, 'Noto', 'Helvetica Neue',  
@@ -42,7 +42,7 @@
 	<template is="dom-bind" id="app" >
 		<paper-drawer-panel id="drawerPanel" responsive-width="1280px" force-narrow="true">
 	      <div class="nav" drawer="">
-	        <a href="/alert">Alerts</a>
+	        <a href="/">Home</a>
 	      </div>
 	      <paper-header-panel class="main" main="" mode="waterfall">        
 	        <paper-toolbar>
@@ -52,11 +52,11 @@
 			</div>
 	        </paper-toolbar>
 	        <div class="content">
-				<clan-info
-					name="*{{.Name}}*"
-					description="*{{.Description}}*"
+				<clan-errors
+					name="Duplicate usernames"
+					description="List of members that have been active with another username"
 				>
-				</clan-info>
+				</clan-errors>
 	        </div>
 	      </paper-header-panel>
 	    </paper-drawer-panel>
