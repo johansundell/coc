@@ -15,6 +15,7 @@ var mysqlUser, mysqlPass, mysqlDb, mysqlHost string
 var urlClan = "https://api.clashofclans.com/v1/clans/%s"
 var urlMembers = "https://api.clashofclans.com/v1/clans/%s/members"
 var myKey, myClanTag string
+var basePath string
 
 func init() {
 	myKey = os.Getenv("COC_KEY")
@@ -24,6 +25,8 @@ func init() {
 	mysqlHost = os.Getenv("MYSQL_COC_HOST")
 	mysqlUser = os.Getenv("MYSQL_USER")
 	mysqlPass = os.Getenv("MYSQL_PASS")
+
+	basePath = os.Getenv("WWW_BASE_PATH")
 
 }
 

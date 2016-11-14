@@ -39,6 +39,8 @@ func handlePages(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	//sort.Sort(cocapi.DonationRatio(clan.MemberList))
+
 	b, err := json.Marshal(clan.MemberList)
 	if err != nil {
 		http.Error(w, http.StatusText(500), 500)
@@ -48,7 +50,7 @@ func handlePages(w http.ResponseWriter, req *http.Request) {
 	p.Name = clan.Name
 	p.Description = clan.Description
 	p.MembersJson = string(b)
-	p.Image = clan.BadgeUrls.Large
+	p.Image = clan.BadgeUrls.Small
 
 	err = t.Execute(w, p)
 	if err != nil {
