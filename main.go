@@ -3,6 +3,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -33,6 +34,7 @@ func init() {
 func main() {
 	db, _ = sql.Open("mysql", mysqlUser+":"+mysqlPass+"@tcp("+mysqlHost+":3306)/"+mysqlDb)
 	defer db.Close()
+	fmt.Println("basepath: ", basePath)
 
 	router := NewRouter()
 	log.Fatal(http.ListenAndServe(":8080", router))
