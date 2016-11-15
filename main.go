@@ -34,6 +34,9 @@ func init() {
 func main() {
 	db, _ = sql.Open("mysql", mysqlUser+":"+mysqlPass+"@tcp("+mysqlHost+":3306)/"+mysqlDb)
 	defer db.Close()
+	if basePath == "" {
+		basePath = "/home/johan/go/src/github.com/johansundell/coc/"
+	}
 	fmt.Println("basepath: ", basePath)
 
 	router := NewRouter()
