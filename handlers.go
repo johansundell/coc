@@ -24,7 +24,7 @@ type alert struct {
 }
 
 func handlePages(w http.ResponseWriter, req *http.Request) {
-	t, err := template.New("clan-info.html").Delims("*{{", "}}*").ParseFiles("tmpl/clan-info.html")
+	t, err := template.New("clan-info.html").Delims("*{{", "}}*").ParseFiles(basePath + "tmpl/clan-info.html")
 	if err != nil {
 		http.Error(w, http.StatusText(500), 500)
 		fmt.Println(err)
@@ -32,14 +32,12 @@ func handlePages(w http.ResponseWriter, req *http.Request) {
 	}
 
 	p := page{}
-	clan, err := cocapi.GetClanInfo(myClanTag)
+	clan, err := getMembers(myClanTag, "rank")
 	if err != nil {
 		http.Error(w, http.StatusText(500), 500)
 		fmt.Println(err)
 		return
 	}
-
-	//sort.Sort(cocapi.DonationRatio(clan.MemberList))
 
 	b, err := json.Marshal(clan.MemberList)
 	if err != nil {
@@ -60,7 +58,7 @@ func handlePages(w http.ResponseWriter, req *http.Request) {
 }
 
 func handleIndexPage(w http.ResponseWriter, req *http.Request) {
-	t, err := template.New("index.html").Delims("*{{", "}}*").ParseFiles("pages/index.html")
+	t, err := template.New("index.html").Delims("*{{", "}}*").ParseFiles(basePath + "pages/index.html")
 
 	if err != nil {
 		http.Error(w, http.StatusText(500), 500)
@@ -80,7 +78,7 @@ func handleIndexPage(w http.ResponseWriter, req *http.Request) {
 }
 
 func getAlerts(w http.ResponseWriter, req *http.Request) {
-	t, err := template.New("alert.html").Delims("*{{", "}}*").ParseFiles("pages/alert.html")
+	t, err := template.New("alert.html").Delims("*{{", "}}*").ParseFiles(basePath + "pages/alert.html")
 	if err != nil {
 		http.Error(w, http.StatusText(500), 500)
 		fmt.Println(err)
@@ -98,7 +96,7 @@ func getAlerts(w http.ResponseWriter, req *http.Request) {
 }
 
 func handleAlerts(w http.ResponseWriter, req *http.Request) {
-	t, err := template.New("clan-errors.html").Delims("*{{", "}}*").ParseFiles("tmpl/clan-errors.html")
+	t, err := template.New("clan-errors.html").Delims("*{{", "}}*").ParseFiles(basePath + "tmpl/clan-errors.html")
 	if err != nil {
 		http.Error(w, http.StatusText(500), 500)
 		fmt.Println(err)
@@ -106,24 +104,6 @@ func handleAlerts(w http.ResponseWriter, req *http.Request) {
 	}
 
 	p := alert{}
-	/*clan, err := cocapi.GetClanInfo(myClanTag)
-	if err != nil {
-		http.Error(w, http.StatusText(500), 500)
-		fmt.Println(err)
-		return
-	}*/
-
-	/*b, err := json.Marshal(clan.MemberList)
-	if err != nil {
-		http.Error(w, http.StatusText(500), 500)
-		fmt.Println(err)
-		return
-	}
-
-	p.Name = clan.Name
-	p.Description = clan.Description
-	p.MembersJson = string(b)
-	p.Image = clan.BadgeUrls.Large*/
 
 	var players = make([]cocapi.Player, 0)
 	rows, err := db.Query("SELECT tag FROM members WHERE active = 1 AND exited > 0")

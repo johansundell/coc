@@ -10,17 +10,32 @@ import (
 )
 
 func init() {
-	routes = append(routes, Route{"members", "GET", "/members", getMembers})
+	routes = append(routes, Route{"members", "GET", "/members", handleGetMembers})
 }
 
-func getMembers(w http.ResponseWriter, req *http.Request) {
+func handleGetMembers(w http.ResponseWriter, req *http.Request) {
 	sortDir := req.FormValue("sort")
 
-	clan, err := cocapi.GetClanInfo(myClanTag)
+	clan, err := getMembers(myClanTag, sortDir)
 	if err != nil {
 		http.Error(w, http.StatusText(500), 500)
 		fmt.Println(err)
 		return
+	}
+
+	b, err := json.Marshal(clan.MemberList)
+	if err != nil {
+		http.Error(w, http.StatusText(500), 500)
+		fmt.Println(err)
+		return
+	}
+	fmt.Fprint(w, string(b))
+}
+
+func getMembers(clanTag, sortDir string) (cocapi.ClanInfo, error) {
+	clan, err := cocapi.GetClanInfo(myClanTag)
+	if err != nil {
+		return clan, err
 	}
 
 	switch sortDir {
@@ -31,12 +46,5 @@ func getMembers(w http.ResponseWriter, req *http.Request) {
 		sort.Sort(cocapi.Roles(clan.MemberList))
 		break
 	}
-
-	b, err := json.Marshal(clan.MemberList)
-	if err != nil {
-		http.Error(w, http.StatusText(500), 500)
-		fmt.Println(err)
-		return
-	}
-	fmt.Fprint(w, string(b))
+	return clan, nil
 }
