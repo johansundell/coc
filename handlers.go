@@ -62,7 +62,7 @@ func handleIndexPage(w http.ResponseWriter, req *http.Request) {
 
 	if err != nil {
 		http.Error(w, http.StatusText(500), 500)
-		fmt.Println(err)
+		fmt.Println(err, basePath+"pages/index.html")
 		return
 	}
 
@@ -81,7 +81,7 @@ func getAlerts(w http.ResponseWriter, req *http.Request) {
 	t, err := template.New("alert.html").Delims("*{{", "}}*").ParseFiles(basePath + "pages/alert.html")
 	if err != nil {
 		http.Error(w, http.StatusText(500), 500)
-		fmt.Println(err)
+		fmt.Println(err, basePath+"pages/alert.html")
 		return
 	}
 	p := page{}
