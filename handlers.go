@@ -114,7 +114,8 @@ func handleAlerts(w http.ResponseWriter, req *http.Request) {
 	for rows.Next() {
 		var tag string
 		rows.Scan(&tag)
-		p, err := cocapi.GetPlayerInfo(tag)
+		//p, err := cocapi.GetPlayerInfo(tag)
+		p, err := cocClient.GetPlayerInfo(tag)
 		if err == nil {
 			players = append(players, p)
 		}
@@ -137,7 +138,8 @@ func handleAlerts(w http.ResponseWriter, req *http.Request) {
 			log.Println(err)
 		}
 		log.Println("Found:", tag)
-		p, err := cocapi.GetPlayerInfo(tag)
+		//p, err := cocapi.GetPlayerInfo(tag)
+		p, err := cocClient.GetPlayerInfo(tag)
 		p.Name = usernames
 		if err == nil {
 			players = append(players, p)

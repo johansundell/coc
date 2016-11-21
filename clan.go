@@ -33,7 +33,8 @@ func handleGetMembers(w http.ResponseWriter, req *http.Request) {
 }
 
 func getMembers(clanTag, sortDir string) (cocapi.ClanInfo, error) {
-	clan, err := cocapi.GetClanInfo(myClanTag)
+	//clan, err := cocapi.GetClanInfo(myClanTag)
+	clan, err := cocClient.GetClanInfo(myClanTag)
 	if err != nil {
 		return clan, err
 	}
