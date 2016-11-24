@@ -8,7 +8,7 @@ import (
 )
 
 type IpInfo struct {
-	Ip string `json:"Ip"`
+	Ip string `json:"ip"`
 }
 
 func (ip *IpInfo) Clean() {
